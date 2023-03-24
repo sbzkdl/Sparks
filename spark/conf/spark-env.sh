@@ -73,3 +73,5 @@
 # - OPENBLAS_NUM_THREADS=1   Disable multi-threading of OpenBLAS
 
 export JAVA_HOME=/home/sbzkdl/sparks/jdk8
+
+SPARK_LOCAL_IP="192.168.98.5"

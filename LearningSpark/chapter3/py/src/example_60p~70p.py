@@ -1,5 +1,7 @@
 from pyspark.sql.types import *
 
+# sparksession 만들기
+
 fire_schema = StructType([StructField("CallNumber", IntegerType(), True),
                           StructField("UnitID", StringType(), True),
                           StructField("IncidentNumber", IntegerType(), True),
@@ -46,8 +48,8 @@ fire_df.write.format("parquet").saveAsTable(parquet_table)
 
 # 프로젝션과 필터
 few_fire_df = (fire_df
-               .select("IncidentNumber", "AvaliableDtTm", "CallType")
-               .where(col("CallType") != "Medical Incident")) # => 안 됨.
+               .select("IncidentNumber", "AvailableDtTm", "CallType")
+               .where(col("CallType") != "Medical Incident"))
 few_fire_df.show(5, truncate=False)
 # CallType 종류가 몇 가지인지 알아보기. -> countDistinct()를 써서 신고 타입의 개수를 되돌려 준다.
 from pyspark.sql.functions import *
@@ -78,12 +80,12 @@ fire_ts_df = (new_fire_df
                 .drop("CallDate")
                 .withColumn("OnWatchDate", to_timestamp(col("WatchDate"), "MM/dd/yyyy"))
                 .drop("WatchDate")
-                .withColumn("AvailableDtTS", to_timestamp(col("AvailableDtTm"), "MM/dd/yyyy hh:mm:ss"))
+                .withColumn("AvailableDtTS", to_timestamp(col("AvailableDtTm"), "MM/dd/yyyy hh:mm:ss a"))
                 .drop("AvailableDtTm"))
 # 변환된 칼럼 가져오기
 (fire_ts_df
     .select("IncidentDate", "OnWatchDate", "AvailableDtTS")
-    .show(5, False)) # => 안 됨
+    .show(5, False))
 
 
 # dayofmonth(), dayofyear(), dayofweek() 함수들 사용하기

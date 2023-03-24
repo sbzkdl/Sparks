@@ -43,6 +43,6 @@ if __name__ == "__main__":
     # show the resulting aggregation for California
     ca_count_mnm_df.show(n=10, truncate=False)
 
-    # 81p 카탈리스트 옵티마이저
+    # 82p 카탈리스트 옵티마이저
     count_mnm_df.explain(True)
 

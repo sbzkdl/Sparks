@@ -1,6 +1,11 @@
 from pyspark.sql.types import *
+from pyspark.sql.functions import *
+from pyspark.sql import SparkSession
 
-# sparksession 만들기
+spark = (SparkSession
+            .builder
+            .appName("Fire")
+            .getOrCreate())
 
 fire_schema = StructType([StructField("CallNumber", IntegerType(), True),
                           StructField("UnitID", StringType(), True),
@@ -37,13 +42,13 @@ sf_fire_file = "LearningSpark/chapter3/data/sf-fire-calls.csv"
 fire_df = spark.read.csv(sf_fire_file, header=True, schema=fire_schema) # spark.read.csv가 pyspark 안에서만 실행된다. 왜지...?
 
 
-# 데이터 프레임을 파케이 파일이나 SQL 테이블로 저장하기
-# 파케이로 저장
-parquet_path = 'fire_df_par'
-fire_df.write.format("parquet").save(parquet_path)
-# 테이블로 저장
-parquet_table = 'fire_df_table'
-fire_df.write.format("parquet").saveAsTable(parquet_table)
+# # 데이터 프레임을 파케이 파일이나 SQL 테이블로 저장하기
+# # 파케이로 저장
+# parquet_path = 'fire_df_par'
+# fire_df.write.format("parquet").save(parquet_path)
+# # 테이블로 저장
+# parquet_table = 'fire_df_table'
+# fire_df.write.format("parquet").saveAsTable(parquet_table)
 
 
 # 프로젝션과 필터
@@ -52,7 +57,6 @@ few_fire_df = (fire_df
                .where(col("CallType") != "Medical Incident"))
 few_fire_df.show(5, truncate=False)
 # CallType 종류가 몇 가지인지 알아보기. -> countDistinct()를 써서 신고 타입의 개수를 되돌려 준다.
-from pyspark.sql.functions import *
 (fire_df
     .select("CallType")
     .where(col("CallType").isNotNull())

@@ -1,0 +1,10 @@
+Spark Command: /home/sbzkdl/sparks/jdk8/bin/java -cp /home/sbzkdl/sparks/spark/conf/:/home/sbzkdl/sparks/spark/jars/* -Xmx1g org.apache.spark.deploy.SparkSubmit --class org.apache.spark.sql.hive.thriftserver.HiveThriftServer2 --name Thrift JDBC/ODBC Server spark-internal
+========================================
+23/03/30 23:21:14 WARN Utils: Your hostname, DESKTOP-OEM44BL resolves to a loopback address: 127.0.1.1; using 192.168.195.177 instead (on interface eth0)
+23/03/30 23:21:14 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+23/03/30 23:21:16 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+23/03/30 23:21:17 WARN HiveConf: HiveConf of name hive.stats.jdbc.timeout does not exist
+23/03/30 23:21:17 WARN HiveConf: HiveConf of name hive.stats.retries.wait does not exist
+23/03/30 23:21:18 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 2.3.0
+23/03/30 23:21:18 WARN ObjectStore: setMetaStoreSchemaVersion called but recording version is disabled: version = 2.3.0, comment = Set by MetaStore sbzkdl@127.0.1.1
+23/03/30 23:23:59 ERROR HiveThriftServer2: RECEIVED SIGNAL TERM

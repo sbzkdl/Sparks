@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 # SparkSession 생성
 spark = (SparkSession
             .builder
-            .appName("SparkSQLPostgre")
+            .appName("SparkMySQL")
             .getOrCreate())
 
 # 로드 함수를 사용하여 JDBC 소스로부터 데이터를 로드
